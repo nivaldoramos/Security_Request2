@@ -1,0 +1,712 @@
+<html>
+<head>
+<title>index.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #a9b7c6;}
+.s1 { color: #e8bf6a;}
+.s2 { color: #bababa;}
+.s3 { color: #a5c261;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+index.html</font>
+</center></td></tr></table>
+<pre><span class="s0">{% extends 'base.html' %}</span>
+<span class="s0">{% include 'header.html' %}</span>
+
+
+
+<span class="s0">{% block title %} Home {% endblock %}</span>
+
+
+
+<span class="s0">{% block body %}</span>
+
+<span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;container&quot;</span><span class="s1">&gt;</span>
+    <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;row&quot;</span><span class="s1">&gt;</span>
+        <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;col md-12&quot;</span><span class="s1">&gt;</span>
+
+            <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;jumbotron p-4&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;h2&gt;</span><span class="s0">NCR </span><span class="s1">&lt;b&gt;</span><span class="s0">Network Connection Request</span><span class="s1">&lt;/b&gt; &lt;button </span><span class="s2">type</span><span class="s3">=&quot;button&quot;  </span><span class="s2">class</span><span class="s3">=&quot;btn btn-success float-right&quot;</span>
+                <span class="s2">data-toggle</span><span class="s3">=&quot;modal&quot; </span><span class="s2">data-target</span><span class="s3">=&quot;#mymodal&quot;</span><span class="s1">&gt;</span><span class="s0">New Request</span><span class="s1">&lt;/button&gt; &lt;/h2&gt;</span>
+                <span class="s0">{% with messages = get_flashed_messages() %}</span>
+
+                <span class="s0">{% if messages %}</span>
+
+                <span class="s0">{% for message in messages %}</span>
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;alert alert-success alert-dismissable&quot; </span><span class="s2">role</span><span class="s3">=&quot;alert&quot;</span><span class="s1">&gt;</span>
+
+                    <span class="s1">&lt;button </span><span class="s2">type</span><span class="s3">=&quot;button&quot; </span><span class="s2">class</span><span class="s3">=&quot;close&quot; </span><span class="s2">data-dismiss</span><span class="s3">=&quot;alert&quot; </span><span class="s2">aria-label</span><span class="s3">=&quot;close&quot;</span><span class="s1">&gt;</span>
+
+                        <span class="s1">&lt;span </span><span class="s2">aria-hidden</span><span class="s3">=&quot;true&quot;</span><span class="s1">&gt;</span><span class="s0">x</span><span class="s1">&lt;/span&gt;</span>
+
+                    <span class="s1">&lt;/button&gt;</span>
+
+
+                <span class="s0">{{message}}</span>
+
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s0">{% endfor %}</span>
+
+                <span class="s0">{% endif %}</span>
+                <span class="s0">{% endwith %}</span>
+
+                <span class="s1">&lt;table </span><span class="s2">class</span><span class="s3">=&quot;table table-hover table-dark&quot;</span><span class="s1">&gt;</span>
+
+                    <span class="s1">&lt;tr&gt;</span>
+
+                        <span class="s1">&lt;th&gt;</span><span class="s0">Request ID</span><span class="s1">&lt;/th&gt;</span>
+                        <span class="s1">&lt;th&gt;</span><span class="s0">Status</span><span class="s1">&lt;/th&gt;</span>
+                        <span class="s1">&lt;th&gt;</span><span class="s0">Requester</span><span class="s1">&lt;/th&gt;</span>
+                        <span class="s1">&lt;th&gt;</span><span class="s0">Company</span><span class="s1">&lt;/th&gt;</span>
+                        <span class="s1">&lt;th&gt;</span><span class="s0">Request Date</span><span class="s1">&lt;/th&gt;</span>
+                        <span class="s1">&lt;th&gt;</span><span class="s0">Expiration</span><span class="s1">&lt;/th&gt;</span>
+                        <span class="s1">&lt;th&gt;</span><span class="s0">Action</span><span class="s1">&lt;/th&gt;</span>
+
+                    <span class="s1">&lt;/tr&gt;</span>
+                   <span class="s0">{% for row in linkrequest %}</span>
+                    <span class="s1">&lt;tr&gt;</span>
+                        <span class="s1">&lt;td&gt;</span><span class="s0">{{row.requestid}}</span><span class="s1">&lt;/td&gt;</span>
+                        <span class="s1">&lt;td&gt;</span><span class="s0">{{row.status}}</span><span class="s1">&lt;/td&gt;</span>
+                        <span class="s1">&lt;td&gt;</span><span class="s0">{{row.req_name}}</span><span class="s1">&lt;/td&gt;</span>
+                        <span class="s1">&lt;td&gt;</span><span class="s0">{{row.company}}</span><span class="s1">&lt;/td&gt;</span>
+                        <span class="s1">&lt;td&gt;</span><span class="s0">{{row.req_date}}</span><span class="s1">&lt;/td&gt;</span>
+                        <span class="s1">&lt;td&gt;</span><span class="s0">{{row.exp_date}}</span><span class="s1">&lt;/td&gt;</span>
+
+                        <span class="s1">&lt;td&gt;</span>
+                            <span class="s1">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;/update/{{row.requestid}}&quot; </span><span class="s2">class</span><span class="s3">=&quot;btn btn-warning btn-xs&quot; </span><span class="s2">data-toggle</span><span class="s3">=&quot;modal&quot; </span><span class="s2">data-target</span><span class="s3">=&quot;#modaledit{{row.requestid}}&quot;</span><span class="s1">&gt;</span><span class="s0">Edit</span><span class="s1">&lt;/a&gt;</span>
+                            <span class="s1">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;/delete/{{row.requestid}}&quot; </span><span class="s2">class</span><span class="s3">=&quot;btn btn-danger btn-xs&quot; </span><span class="s2">onclick</span><span class="s3">=&quot;return confirm('Are You Sure To Delete ?')&quot;</span><span class="s1">&gt;</span><span class="s0">Delete</span><span class="s1">&lt;/a&gt;</span>
+
+                        <span class="s1">&lt;/td&gt;</span>
+
+
+                    <span class="s1">&lt;/tr&gt;</span>
+
+ <span class="s4">&lt;!-- Modal Edit Registers--&gt;</span>
+<span class="s1">&lt;div </span><span class="s2">id</span><span class="s3">=&quot;modaledit{{row.requestid}}&quot; </span><span class="s2">class</span><span class="s3">=&quot;modal fade&quot; </span><span class="s2">role</span><span class="s3">=&quot;dialog&quot;</span><span class="s1">&gt;</span>
+   <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;modal-dialog&quot;</span><span class="s1">&gt;</span>
+
+      <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;modal-content&quot;</span><span class="s1">&gt;</span>
+
+         <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;modal-header&quot;</span><span class="s1">&gt;</span>
+
+            <span class="s1">&lt;h4 </span><span class="s2">class</span><span class="s3">=&quot;modal-title&quot;</span><span class="s1">&gt;</span><span class="s0">Update Request</span><span class="s1">&lt;/h4&gt;</span>
+
+         <span class="s1">&lt;/div&gt;</span>
+
+         <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;modal-body&quot;</span><span class="s1">&gt;</span>
+
+            <span class="s1">&lt;form </span><span class="s2">action</span><span class="s3">=&quot;{{url_for('update')}}&quot; </span><span class="s2">method</span><span class="s3">=&quot;POST&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Status:</span><span class="s1">&lt;/label&gt;</span>
+                   <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;hidden&quot;  </span><span class="s2">name</span><span class="s3">=&quot;requestid&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.requestid}}&quot;</span><span class="s1">&gt;</span>
+
+                    <span class="s1">&lt;SELECT </span><span class="s2">name</span><span class="s3">=&quot;status&quot;</span><span class="s1">&gt;</span>
+                        <span class="s0">{% for sl in status_list %}</span>
+                        <span class="s1">&lt;option </span><span class="s2">value</span><span class="s3">=&quot;{{sl.type_status}}&quot; </span><span class="s2">{% if sl.type_status </span><span class="s3">== </span><span class="s2">row.status %} selected{% endif %} </span><span class="s1">&gt;</span><span class="s0">{{sl.type_status}}</span><span class="s1">&lt;/option&gt;</span>
+                        <span class="s0">{% endfor %}</span>
+                    <span class="s1">&lt;/SELECT&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">Requester Information:</span><span class="s1">&lt;/div&gt;</span>
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Requester Name:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;req_name&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.req_name}}&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">E-mail:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;email&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;req_mail&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.req_mail}}&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Contact:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;phone&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;req_phone&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.req_phone}}&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Team:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;req_team&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.req_team}}&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Project:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;project&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.project}}&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Justification:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;justification&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.justification}}&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+                  <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Services:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;saltpayservice&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.saltpayservice}}&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">ELR Information:</span><span class="s1">&lt;/div&gt;</span>
+
+               <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Type:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;req_type&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.req_type}}&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+                 <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Firewall:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;firewall&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.firewall}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Virtual Sys:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;virtualsys&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.virtualsys}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">3rd Party Information:</span><span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Company:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;company&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.company}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Address:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;c_address&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.c_address}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">City:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;c_city&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.c_city}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Country:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;c_country&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.c_country}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Contact:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;c_name&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.c_name}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">E-Mail:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;c_mail&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.c_mail}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Phone:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;c_phone&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.c_phone}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">3rd-Technical Information (mandatory):</span><span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Engineer's Name:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;t_name&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.t_name}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Engineer's e-mail:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;t_mail&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.t_mail}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Engineer's phone:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;t_phone&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.t_phone}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">3rd-Technical Backup (optional):</span><span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Engineer's Name:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;t2_name&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.t2_name}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Engineer's e-mail:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;t2_mail&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.t2_mail}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Engineer's phone:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;t2_phone&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.t2_phone}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">Technical Details (mandatory):</span><span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Device Make:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;r_devicemake&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.r_devicemake}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Remote Peer Address:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;r_peer&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.r_peer}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Remote Network(s):</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;r_network&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.r_network}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                 <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">NAT:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;nat&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.nat}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">Phase I:</span><span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Algorithm</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;p1_algo&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.p1_algo}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Hash</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;p1_hash&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.p1_hash}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">IKE Version</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;p1_pfs&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.status}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Lifetime</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;p1_lifetime&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.p1_lifetime}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">Phase II:</span><span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Algorithm</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;p2_algo&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.p2_algo}}&quot; </span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Hash</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;p2_hash&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.p2_hash}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">PFS Group</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;p2_pfs&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.p2_pfs}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Lifetime</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;p2_lifetime&quot; </span><span class="s2">value</span><span class="s3">=&quot;{{row.p2_lifetime}}&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+
+               <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;button </span><span class="s2">class</span><span class="s3">=&quot;btn btn-primary&quot; </span><span class="s2">type</span><span class="s3">=&quot;submit&quot;</span><span class="s1">&gt;</span><span class="s0">Update</span><span class="s1">&lt;/button&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+
+            <span class="s1">&lt;/form&gt;</span>
+
+         <span class="s1">&lt;/div&gt;</span>
+
+         <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;modal-footer&quot;</span><span class="s1">&gt;</span>
+
+
+            <span class="s1">&lt;button </span><span class="s2">type</span><span class="s3">=&quot;button&quot; </span><span class="s2">class</span><span class="s3">=&quot;btn btn-secondary&quot; </span><span class="s2">data-dismiss</span><span class="s3">=&quot;modal&quot;</span><span class="s1">&gt;</span><span class="s0">Close</span><span class="s1">&lt;/button&gt;</span>
+
+
+         <span class="s1">&lt;/div&gt;</span>
+
+
+      <span class="s1">&lt;/div&gt;</span>
+
+
+   <span class="s1">&lt;/div&gt;</span>
+
+<span class="s1">&lt;/div&gt;</span>
+
+
+                    <span class="s0">{% endfor %}</span>
+
+
+                <span class="s1">&lt;/table&gt;</span>
+
+
+            <span class="s1">&lt;/div&gt;</span>
+
+             <span class="s4">&lt;!-- Modal Add Request--&gt;</span>
+
+
+
+<span class="s1">&lt;div </span><span class="s2">id</span><span class="s3">=&quot;mymodal&quot; </span><span class="s2">class</span><span class="s3">=&quot;modal fade&quot; </span><span class="s2">role</span><span class="s3">=&quot;dialog&quot;</span><span class="s1">&gt;</span>
+   <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;modal-dialog&quot;</span><span class="s1">&gt;</span>
+      <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;modal-content&quot;</span><span class="s1">&gt;</span>
+         <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;modal-header&quot;</span><span class="s1">&gt;</span>
+
+            <span class="s1">&lt;h4 </span><span class="s2">class</span><span class="s3">=&quot;modal-title&quot;</span><span class="s1">&gt;</span><span class="s0">Create Request</span><span class="s1">&lt;/h4&gt;</span>
+         <span class="s1">&lt;/div&gt;</span>
+         <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;modal-body&quot;</span><span class="s1">&gt;</span>
+
+            <span class="s1">&lt;form </span><span class="s2">action</span><span class="s3">=&quot;{{url_for('insert')}}&quot; </span><span class="s2">method</span><span class="s3">=&quot;POST&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;label&gt;</span><span class="s0">Status:</span><span class="s1">&lt;/label&gt;</span>
+                <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;status&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot; </span><span class="s2">value</span><span class="s3">=&quot;New Request&quot; </span><span class="s2">readonly</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+
+
+
+                <span class="s1">&lt;ul </span><span class="s2">class</span><span class="s3">=&quot;nav nav-tabs&quot; </span><span class="s2">id</span><span class="s3">=&quot;myTab&quot; </span><span class="s2">role</span><span class="s3">=&quot;tablist&quot;</span><span class="s1">&gt;</span>
+                  <span class="s1">&lt;li </span><span class="s2">class</span><span class="s3">=&quot;nav-item&quot;</span><span class="s1">&gt;</span>
+                    <span class="s1">&lt;a </span><span class="s2">class</span><span class="s3">=&quot;nav-link active&quot; </span><span class="s2">data-toggle</span><span class="s3">=&quot;tab&quot; </span><span class="s2">href</span><span class="s3">=&quot;#home&quot; </span><span class="s2">role</span><span class="s3">=&quot;tab&quot; </span><span class="s2">aria-controls</span><span class="s3">=&quot;home&quot;</span><span class="s1">&gt;</span><span class="s0">Requester</span><span class="s1">&lt;/a&gt;</span>
+                  <span class="s1">&lt;/li&gt;</span>
+                  <span class="s1">&lt;li </span><span class="s2">class</span><span class="s3">=&quot;nav-item&quot;</span><span class="s1">&gt;</span>
+                    <span class="s1">&lt;a </span><span class="s2">class</span><span class="s3">=&quot;nav-link&quot; </span><span class="s2">data-toggle</span><span class="s3">=&quot;tab&quot; </span><span class="s2">href</span><span class="s3">=&quot;#profile&quot; </span><span class="s2">role</span><span class="s3">=&quot;tab&quot; </span><span class="s2">aria-controls</span><span class="s3">=&quot;profile&quot;</span><span class="s1">&gt;</span><span class="s0">Partner</span><span class="s1">&lt;/a&gt;</span>
+                  <span class="s1">&lt;/li&gt;</span>
+                  <span class="s1">&lt;li </span><span class="s2">class</span><span class="s3">=&quot;nav-item&quot;</span><span class="s1">&gt;</span>
+                    <span class="s1">&lt;a </span><span class="s2">class</span><span class="s3">=&quot;nav-link&quot; </span><span class="s2">data-toggle</span><span class="s3">=&quot;tab&quot; </span><span class="s2">href</span><span class="s3">=&quot;#messages&quot; </span><span class="s2">role</span><span class="s3">=&quot;tab&quot; </span><span class="s2">aria-controls</span><span class="s3">=&quot;messages&quot;</span><span class="s1">&gt;</span><span class="s0">IPSec</span><span class="s1">&lt;/a&gt;</span>
+                  <span class="s1">&lt;/li&gt;</span>
+                  <span class="s1">&lt;li </span><span class="s2">class</span><span class="s3">=&quot;nav-item&quot;</span><span class="s1">&gt;</span>
+                    <span class="s1">&lt;a </span><span class="s2">class</span><span class="s3">=&quot;nav-link&quot; </span><span class="s2">data-toggle</span><span class="s3">=&quot;tab&quot; </span><span class="s2">href</span><span class="s3">=&quot;#settings&quot; </span><span class="s2">role</span><span class="s3">=&quot;tab&quot; </span><span class="s2">aria-controls</span><span class="s3">=&quot;settings&quot;</span><span class="s1">&gt;</span><span class="s0">Rules</span><span class="s1">&lt;/a&gt;</span>
+                  <span class="s1">&lt;/li&gt;</span>
+                <span class="s1">&lt;/ul&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;tab-content&quot;</span><span class="s1">&gt;</span>
+                    <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;tab-pane active&quot; </span><span class="s2">id</span><span class="s3">=&quot;home&quot; </span><span class="s2">role</span><span class="s3">=&quot;tabpanel&quot;</span><span class="s1">&gt;</span>
+
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">Requester Information:</span><span class="s1">&lt;/div&gt;</span>
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Requester Name:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;req_name&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">E-mail:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;email&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;req_mail&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Contact:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;phone&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;req_phone&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Team:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;req_team&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Project:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;project&quot; </span><span class="s2">required</span><span class="s3">=&quot;0&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Justification:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;justification&quot; </span><span class="s2">required</span><span class="s3">=&quot;0&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+                  <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Services:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;saltpayservice&quot; </span><span class="s2">required</span><span class="s3">=&quot;0&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">ELR Information:</span><span class="s1">&lt;/div&gt;</span>
+
+               <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Type:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;req_type&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+               <span class="s1">&lt;/div&gt;</span>
+                 <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;label&gt;</span><span class="s0">Firewall:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;firewall&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Virtual Sys:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;virtualsys&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                        <span class="s1">&lt;/div&gt;</span>
+
+                    <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;tab-pane&quot; </span><span class="s2">id</span><span class="s3">=&quot;profile&quot; </span><span class="s2">role</span><span class="s3">=&quot;tabpanel&quot;</span><span class="s1">&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">3rd Party Information:</span><span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Company:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;company&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Address:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;c_address&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">City:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;c_city&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Country:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;c_country&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Contact:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;c_name&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">E-Mail:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;c_mail&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Phone:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;c_phone&quot; </span><span class="s2">required</span><span class="s3">=&quot;0&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">3rd-Technical Information (mandatory):</span><span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Engineer's Name:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;t_name&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Engineer's e-mail:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;t_mail&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Engineer's phone:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;t_phone&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">3rd-Technical Backup (optional):</span><span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Engineer's Name:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;t2_name&quot; </span><span class="s2">required</span><span class="s3">=&quot;0&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Engineer's e-mail:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;t2_mail&quot; </span><span class="s2">required</span><span class="s3">=&quot;0&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Engineer's phone:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;t2_phone&quot; </span><span class="s2">required</span><span class="s3">=&quot;0&quot;</span><span class="s1">&gt;</span>
+
+
+                    <span class="s1">&lt;/div&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                    <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;tab-pane&quot; </span><span class="s2">id</span><span class="s3">=&quot;messages&quot; </span><span class="s2">role</span><span class="s3">=&quot;tabpanel&quot;</span><span class="s1">&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">Technical Details (mandatory):</span><span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Device Make:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;r_devicemake&quot; </span><span class="s2">required</span><span class="s3">=&quot;0&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Remote Peer Address:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;r_peer&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Remote Network(s):</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;r_network&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                 <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">NAT:</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;nat&quot; </span><span class="s2">required</span><span class="s3">=&quot;0&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span><span class="s0">Phase I:</span><span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Encryption algorithm</span><span class="s1">&lt;/label&gt;</span>
+
+                    <span class="s1">&lt;SELECT </span><span class="s2">name</span><span class="s3">=&quot;p1_algo&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot;</span><span class="s1">&gt;</span>
+                     <span class="s0">{% for p1crypto in p1_encrypt_list_data %}</span>
+                        <span class="s1">&lt;option </span><span class="s2">value</span><span class="s3">={{p1crypto.p1_encryption}}</span><span class="s1">&gt;</span><span class="s0">{{p1crypto.p1_encryption}}</span><span class="s1">&lt;/option&gt;</span>
+                     <span class="s0">{% endfor %}</span>
+                   <span class="s1">&lt;/SELECT&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Authentication algorithm</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;SELECT </span><span class="s2">name</span><span class="s3">=&quot;p1_hash&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot;</span><span class="s1">&gt;</span>
+                     <span class="s0">{% for auth in auth_list_ %}</span>
+                        <span class="s1">&lt;option </span><span class="s2">value</span><span class="s3">={{auth.auth_al}}</span><span class="s1">&gt;</span><span class="s0">{{auth.auth_al}}</span><span class="s1">&lt;/option&gt;</span>
+                     <span class="s0">{% endfor %}</span>
+                  <span class="s1">&lt;/SELECT&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">IKE Version</span><span class="s1">&lt;/label&gt;</span>
+                    <span class="s1">&lt;SELECT </span><span class="s2">name</span><span class="s3">=&quot;p1_pfs&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot;</span><span class="s1">&gt;</span>
+                        <span class="s1">&lt;option </span><span class="s2">value</span><span class="s3">=v1</span><span class="s1">&gt;</span><span class="s0">v1</span><span class="s1">&lt;/option&gt;</span>
+                        <span class="s1">&lt;option </span><span class="s2">value</span><span class="s3">=v2</span><span class="s1">&gt;</span><span class="s0">v2</span><span class="s1">&lt;/option&gt;</span>
+                  <span class="s1">&lt;/SELECT&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Lifetime</span><span class="s1">&lt;/label&gt;</span>
+                   <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;p1_lifetime&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot; </span><span class="s2">value</span><span class="s3">=&quot;86400&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;&lt;h5&gt;&lt;b&gt;</span><span class="s0">Phase II:</span><span class="s1">&lt;/b&gt;&lt;/h5&gt;&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Encryption algorithm</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;SELECT </span><span class="s2">name</span><span class="s3">=&quot;p2_algo&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot;</span><span class="s1">&gt;</span>
+                     <span class="s0">{% for p1crypto in p1_encrypt_list_data %}</span>
+                        <span class="s1">&lt;option </span><span class="s2">value</span><span class="s3">={{p1crypto.p1_encryption}}</span><span class="s1">&gt;</span><span class="s0">{{p1crypto.p1_encryption}}</span><span class="s1">&lt;/option&gt;</span>
+                     <span class="s0">{% endfor %}</span>
+                   <span class="s1">&lt;/SELECT&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Authentication algorithm</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;SELECT </span><span class="s2">name</span><span class="s3">=&quot;p2_hash&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot;</span><span class="s1">&gt;</span>
+                     <span class="s0">{% for auth in auth_list_ %}</span>
+                        <span class="s1">&lt;option </span><span class="s2">value</span><span class="s3">={{auth.auth_al}}</span><span class="s1">&gt;</span><span class="s0">{{auth.auth_al}}</span><span class="s1">&lt;/option&gt;</span>
+                     <span class="s0">{% endfor %}</span>
+                  <span class="s1">&lt;/SELECT&gt;</span>
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                    <span class="s1">&lt;label&gt;</span><span class="s0">PFS </span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;SELECT </span><span class="s2">name</span><span class="s3">=&quot;p2_pfs&quot; </span><span class="s2">required</span><span class="s3">=&quot;1&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot;</span><span class="s1">&gt;</span>
+                     <span class="s0">{% for pfs_i in pfs_list_ %}</span>
+                        <span class="s1">&lt;option </span><span class="s2">value</span><span class="s3">={{pfs_i.pfs_value}}</span><span class="s1">&gt;</span><span class="s0">{{pfs_i.pfs_value}}</span><span class="s1">&lt;/option&gt;</span>
+                     <span class="s0">{% endfor %}</span>
+                  <span class="s1">&lt;/SELECT&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+                <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                   <span class="s1">&lt;label&gt;</span><span class="s0">Lifetime</span><span class="s1">&lt;/label&gt;</span>
+                  <span class="s1">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;form-control&quot; </span><span class="s2">name</span><span class="s3">=&quot;p2_lifetime&quot; </span><span class="s2">required</span><span class="s3">='1' </span><span class="s2">value</span><span class="s3">=&quot;3600&quot;</span><span class="s1">&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+<span class="s1">&lt;/div&gt;</span>
+                 <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;form-group&quot;</span><span class="s1">&gt;</span>
+
+                  <span class="s1">&lt;button </span><span class="s2">class</span><span class="s3">=&quot;btn btn-primary&quot; </span><span class="s2">type</span><span class="s3">=&quot;submit&quot;</span><span class="s1">&gt;</span><span class="s0">Submit Request</span><span class="s1">&lt;/button&gt;</span>
+
+                <span class="s1">&lt;/div&gt;</span>
+
+             <span class="s1">&lt;/form&gt;</span>
+
+          <span class="s1">&lt;/div&gt;</span>
+
+          <span class="s1">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;modal-footer&quot;</span><span class="s1">&gt;</span>
+
+            <span class="s1">&lt;button </span><span class="s2">type</span><span class="s3">=&quot;button&quot; </span><span class="s2">class</span><span class="s3">=&quot;btn btn-secondary&quot; </span><span class="s2">data-dismiss</span><span class="s3">=&quot;modal&quot;</span><span class="s1">&gt;</span><span class="s0">Close</span><span class="s1">&lt;/button&gt;</span>
+
+          <span class="s1">&lt;/div&gt;</span>
+        <span class="s1">&lt;/div&gt;</span>
+     <span class="s1">&lt;/div&gt;</span>
+
+ <span class="s1">&lt;/div&gt;</span>
+        <span class="s1">&lt;/div&gt;</span>
+    <span class="s1">&lt;/div&gt;</span>
+ <span class="s1">&lt;/div&gt;</span>
+<span class="s1">&lt;script&gt;</span>
+  <span class="s0">$(function ()</span>
+    <span class="s0">$('#myTab a:last').tab('show')</span>
+  <span class="s0">)</span>
+<span class="s1">&lt;/script&gt;</span>
+<span class="s0">{% endblock %}</span></pre>
+</body>
+</html>

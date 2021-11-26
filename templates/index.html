@@ -1,0 +1,687 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+
+            <div class="jumbotron p-4">
+
+                <h2>NCR <b>Network Connection Request</b> <button type="button"  class="btn btn-success float-right"
+                data-toggle="modal" data-target="#mymodal">New Request</button> </h2>
+                {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+
+                {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissable" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                        <span aria-hidden="true">x</span>
+
+                    </button>
+
+                {{message}}
+
+
+                </div>
+                {% endfor %}
+
+                {% endif %}
+                {% endwith %}
+
+                <table class="table table-hover table-dark">
+
+                    <tr>
+
+                        <th>Request ID</th>
+                        <th>Status</th>
+                        <th>Requester</th>
+                        <th>Company</th>
+                        <th>Request Date</th>
+                        <th>Expiration</th>
+                        <th>Action</th>
+
+                    </tr>
+                   {% for row in linkrequest %}
+                    <tr>
+                        <td>{{row.requestid}}</td>
+                        <td>{{row.status}}</td>
+                        <td>{{row.req_name}}</td>
+                        <td>{{row.company}}</td>
+                        <td>{{row.req_date}}</td>
+                        <td>{{row.exp_date}}</td>
+
+                        <td>
+                            <a href="/update/{{row.requestid}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.requestid}}">Edit</a>
+                            <a href="/delete/{{row.requestid}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+
+                        </td>
+
+
+                    </tr>
+
+ <!-- Modal Edit Registers-->
+<div id="modaledit{{row.requestid}}" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+
+      <div class="modal-content">
+
+         <div class="modal-header">
+
+            <h4 class="modal-title">Update Request</h4>
+
+         </div>
+
+         <div class="modal-body">
+
+            <form action="{{url_for('update')}}" method="POST">
+
+               <div class="form-group">
+
+                   <label>Status:</label>
+                   <input type="hidden"  name="requestid" value="{{row.requestid}}">
+
+                    <SELECT name="status">
+                        {% for sl in status_list %}
+                        <option value="{{sl.type_status}}" {% if sl.type_status == row.status %} selected{% endif %} >{{sl.type_status}}</option>
+                        {% endfor %}
+                    </SELECT>
+
+                </div>
+
+                <div class="form-group">Requester Information:</div>
+
+                <div class="form-group">
+
+                  <label>Requester Name:</label>
+                  <input type="text" class="form-control" name="req_name" value="{{row.req_name}}">
+
+               </div>
+                <div class="form-group">
+
+                  <label>E-mail:</label>
+                  <input type="email" class="form-control" name="req_mail" value="{{row.req_mail}}">
+
+               </div>
+
+                <div class="form-group">
+
+                  <label>Contact:</label>
+                  <input type="phone" class="form-control" name="req_phone" value="{{row.req_phone}}">
+
+               </div>
+                <div class="form-group">
+
+                  <label>Team:</label>
+                  <input type="text" class="form-control" name="req_team" value="{{row.req_team}}">
+
+               </div>
+                <div class="form-group">
+
+                  <label>Project:</label>
+                  <input type="text" class="form-control" name="project" value="{{row.project}}">
+
+               </div>
+
+
+                <div class="form-group">
+
+                  <label>Justification:</label>
+                  <input type="text" class="form-control" name="justification" value="{{row.justification}}">
+
+               </div>
+                  <div class="form-group">
+
+                  <label>Services:</label>
+                  <input type="text" class="form-control" name="saltpayservice" value="{{row.saltpayservice}}">
+
+               </div>
+
+                <div class="form-group">ELR Information:</div>
+
+               <div class="form-group">
+
+                  <label>Type:</label>
+                  <input type="text" class="form-control" name="req_type" value="{{row.req_type}}">
+
+               </div>
+                 <div class="form-group">
+
+                  <label>Firewall:</label>
+                  <input type="text" class="form-control" name="firewall" value="{{row.firewall}}">
+
+                </div>
+
+                <div class="form-group">
+
+                   <label>Virtual Sys:</label>
+                  <input type="text" class="form-control" name="virtualsys" value="{{row.virtualsys}}">
+
+                </div>
+                <div class="form-group">3rd Party Information:</div>
+                <div class="form-group">
+
+                   <label>Company:</label>
+                  <input type="text" class="form-control" name="company" value="{{row.company}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Address:</label>
+                  <input type="text" class="form-control" name="c_address" value="{{row.c_address}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>City:</label>
+                  <input type="text" class="form-control" name="c_city" value="{{row.c_city}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Country:</label>
+                  <input type="text" class="form-control" name="c_country" value="{{row.c_country}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Contact:</label>
+                  <input type="text" class="form-control" name="c_name" value="{{row.c_name}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>E-Mail:</label>
+                  <input type="text" class="form-control" name="c_mail" value="{{row.c_mail}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Phone:</label>
+                  <input type="text" class="form-control" name="c_phone" value="{{row.c_phone}}">
+
+                </div>
+                <div class="form-group">3rd-Technical Information (mandatory):</div>
+                <div class="form-group">
+
+                   <label>Engineer's Name:</label>
+                  <input type="text" class="form-control" name="t_name" value="{{row.t_name}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Engineer's e-mail:</label>
+                  <input type="text" class="form-control" name="t_mail" value="{{row.t_mail}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Engineer's phone:</label>
+                  <input type="text" class="form-control" name="t_phone" value="{{row.t_phone}}">
+
+                </div>
+                <div class="form-group">3rd-Technical Backup (optional):</div>
+                <div class="form-group">
+
+                   <label>Engineer's Name:</label>
+                  <input type="text" class="form-control" name="t2_name" value="{{row.t2_name}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Engineer's e-mail:</label>
+                  <input type="text" class="form-control" name="t2_mail" value="{{row.t2_mail}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Engineer's phone:</label>
+                  <input type="text" class="form-control" name="t2_phone" value="{{row.t2_phone}}">
+
+                </div>
+                <div class="form-group">Technical Details (mandatory):</div>
+                <div class="form-group">
+
+                   <label>Device Make:</label>
+                  <input type="text" class="form-control" name="r_devicemake" value="{{row.r_devicemake}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Remote Peer Address:</label>
+                  <input type="text" class="form-control" name="r_peer" value="{{row.r_peer}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Remote Network(s):</label>
+                  <input type="text" class="form-control" name="r_network" value="{{row.r_network}}">
+
+                </div>
+                 <div class="form-group">
+
+                   <label>NAT:</label>
+                  <input type="text" class="form-control" name="nat" value="{{row.nat}}">
+
+                </div>
+                <div class="form-group">Phase I:</div>
+                <div class="form-group">
+
+                   <label>Algorithm</label>
+                  <input type="text" class="form-control" name="p1_algo" value="{{row.p1_algo}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Hash</label>
+                  <input type="text" class="form-control" name="p1_hash" value="{{row.p1_hash}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>IKE Version</label>
+                  <input type="text" class="form-control" name="p1_pfs" value="{{row.status}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Lifetime</label>
+                  <input type="text" class="form-control" name="p1_lifetime" value="{{row.p1_lifetime}}">
+
+                </div>
+
+                <div class="form-group">Phase II:</div>
+                <div class="form-group">
+
+                   <label>Algorithm</label>
+                  <input type="text" class="form-control" name="p2_algo" value="{{row.p2_algo}}" >
+
+                </div>
+                <div class="form-group">
+
+                   <label>Hash</label>
+                  <input type="text" class="form-control" name="p2_hash" value="{{row.p2_hash}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>PFS Group</label>
+                  <input type="text" class="form-control" name="p2_pfs" value="{{row.p2_pfs}}">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Lifetime</label>
+                  <input type="text" class="form-control" name="p2_lifetime" value="{{row.p2_lifetime}}">
+
+                </div>
+
+               <div class="form-group">
+
+                  <button class="btn btn-primary" type="submit">Update</button>
+
+               </div>
+
+            </form>
+
+         </div>
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+</div>
+
+
+                    {% endfor %}
+
+
+                </table>
+
+
+            </div>
+
+             <!-- Modal Add Request-->
+
+
+
+<div id="mymodal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+
+            <h4 class="modal-title">Create Request</h4>
+         </div>
+         <div class="modal-body">
+
+            <form action="{{url_for('insert')}}" method="POST">
+
+                <div class="form-group">
+
+                <label>Status:</label>
+                <input type="text" class="form-control" name="status" required="1" value="New Request" readonly>
+
+                </div>
+
+
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-controls="home">Requester</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">Partner</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#messages" role="tab" aria-controls="messages">IPSec</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#settings" role="tab" aria-controls="settings">Rules</a>
+                  </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home" role="tabpanel">
+
+
+                <div class="form-group">Requester Information:</div>
+
+                <div class="form-group">
+
+                  <label>Requester Name:</label>
+                  <input type="text" class="form-control" name="req_name" required="1">
+
+               </div>
+                <div class="form-group">
+
+                  <label>E-mail:</label>
+                  <input type="email" class="form-control" name="req_mail" required="1">
+
+               </div>
+
+                <div class="form-group">
+
+                  <label>Contact:</label>
+                  <input type="phone" class="form-control" name="req_phone" required="1">
+
+               </div>
+                <div class="form-group">
+
+                  <label>Team:</label>
+                  <input type="text" class="form-control" name="req_team" required="1">
+
+               </div>
+                <div class="form-group">
+
+                  <label>Project:</label>
+                  <input type="text" class="form-control" name="project" required="0">
+
+               </div>
+
+
+                <div class="form-group">
+
+                  <label>Justification:</label>
+                  <input type="text" class="form-control" name="justification" required="0">
+
+               </div>
+                  <div class="form-group">
+
+                  <label>Services:</label>
+                  <input type="text" class="form-control" name="saltpayservice" required="0">
+
+               </div>
+
+                <div class="form-group">ELR Information:</div>
+
+               <div class="form-group">
+
+                  <label>Type:</label>
+                  <input type="text" class="form-control" name="req_type" required="1">
+
+               </div>
+                 <div class="form-group">
+
+                  <label>Firewall:</label>
+                  <input type="text" class="form-control" name="firewall" required="1">
+
+                </div>
+
+                <div class="form-group">
+
+                   <label>Virtual Sys:</label>
+                  <input type="text" class="form-control" name="virtualsys" required="1">
+
+                </div>
+                        </div>
+
+                    <div class="tab-pane" id="profile" role="tabpanel">
+                <div class="form-group">3rd Party Information:</div>
+                <div class="form-group">
+
+                   <label>Company:</label>
+                  <input type="text" class="form-control" name="company" required="1">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Address:</label>
+                  <input type="text" class="form-control" name="c_address" required="1">
+
+                </div>
+                <div class="form-group">
+
+                   <label>City:</label>
+                  <input type="text" class="form-control" name="c_city" required="1">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Country:</label>
+                  <input type="text" class="form-control" name="c_country" required="1">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Contact:</label>
+                  <input type="text" class="form-control" name="c_name" required="1">
+
+                </div>
+                <div class="form-group">
+
+                   <label>E-Mail:</label>
+                  <input type="text" class="form-control" name="c_mail" required="1">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Phone:</label>
+                  <input type="text" class="form-control" name="c_phone" required="0">
+
+                </div>
+                <div class="form-group">3rd-Technical Information (mandatory):</div>
+                <div class="form-group">
+
+                   <label>Engineer's Name:</label>
+                  <input type="text" class="form-control" name="t_name" required="1">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Engineer's e-mail:</label>
+                  <input type="text" class="form-control" name="t_mail" required="1">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Engineer's phone:</label>
+                  <input type="text" class="form-control" name="t_phone" required="1">
+
+                </div>
+                <div class="form-group">3rd-Technical Backup (optional):</div>
+                <div class="form-group">
+
+                   <label>Engineer's Name:</label>
+                  <input type="text" class="form-control" name="t2_name" required="0">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Engineer's e-mail:</label>
+                  <input type="text" class="form-control" name="t2_mail" required="0">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Engineer's phone:</label>
+                  <input type="text" class="form-control" name="t2_phone" required="0">
+
+
+                    </div>
+
+                </div>
+                    <div class="tab-pane" id="messages" role="tabpanel">
+                <div class="form-group">Technical Details (mandatory):</div>
+                <div class="form-group">
+
+                   <label>Device Make:</label>
+                  <input type="text" class="form-control" name="r_devicemake" required="0">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Remote Peer Address:</label>
+                  <input type="text" class="form-control" name="r_peer" required="1">
+
+                </div>
+                <div class="form-group">
+
+                   <label>Remote Network(s):</label>
+                  <input type="text" class="form-control" name="r_network" required="1">
+
+                </div>
+                 <div class="form-group">
+
+                   <label>NAT:</label>
+                  <input type="text" class="form-control" name="nat" required="0">
+
+                </div>
+                <div class="form-group">Phase I:</div>
+                <div class="form-group">
+
+                   <label>Encryption algorithm</label>
+
+                    <SELECT name="p1_algo" required="1" class="form-control">
+                     {% for p1crypto in p1_encrypt_list_data %}
+                        <option value={{p1crypto.p1_encryption}}>{{p1crypto.p1_encryption}}</option>
+                     {% endfor %}
+                   </SELECT>
+
+                </div>
+                <div class="form-group">
+
+                   <label>Authentication algorithm</label>
+                  <SELECT name="p1_hash" required="1" class="form-control">
+                     {% for auth in auth_list_ %}
+                        <option value={{auth.auth_al}}>{{auth.auth_al}}</option>
+                     {% endfor %}
+                  </SELECT>
+
+                </div>
+                <div class="form-group">
+
+                   <label>IKE Version</label>
+                    <SELECT name="p1_pfs" required="1" class="form-control">
+                        <option value=v1>v1</option>
+                        <option value=v2>v2</option>
+                  </SELECT>
+
+                </div>
+                <div class="form-group">
+
+                   <label>Lifetime</label>
+                   <input type="text" class="form-control" name="p1_lifetime" required="1" value="86400">
+
+                </div>
+
+                <div class="form-group"><h5><b>Phase II:</b></h5></div>
+                <div class="form-group">
+
+                   <label>Encryption algorithm</label>
+                  <SELECT name="p2_algo" required="1" class="form-control">
+                     {% for p1crypto in p1_encrypt_list_data %}
+                        <option value={{p1crypto.p1_encryption}}>{{p1crypto.p1_encryption}}</option>
+                     {% endfor %}
+                   </SELECT>
+
+                </div>
+                <div class="form-group">
+
+                   <label>Authentication algorithm</label>
+                  <SELECT name="p2_hash" required="1" class="form-control">
+                     {% for auth in auth_list_ %}
+                        <option value={{auth.auth_al}}>{{auth.auth_al}}</option>
+                     {% endfor %}
+                  </SELECT>
+                </div>
+                <div class="form-group">
+
+                    <label>PFS </label>
+                  <SELECT name="p2_pfs" required="1" class="form-control">
+                     {% for pfs_i in pfs_list_ %}
+                        <option value={{pfs_i.pfs_value}}>{{pfs_i.pfs_value}}</option>
+                     {% endfor %}
+                  </SELECT>
+
+                </div>
+                <div class="form-group">
+
+                   <label>Lifetime</label>
+                  <input type="text" class="form-control" name="p2_lifetime" required='1' value="3600">
+
+                </div>
+</div>
+                 <div class="form-group">
+
+                  <button class="btn btn-primary" type="submit">Submit Request</button>
+
+                </div>
+                </div>
+             </form>
+
+          </div>
+
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+     </div>
+
+ </div>
+        </div>
+    </div>
+ </div>
+<script>
+  $(function ()
+    $('#myTab a:last').tab('show')
+  )
+</script>
+{% endblock %}
